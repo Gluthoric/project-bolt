@@ -12,6 +12,7 @@ export interface Card {
   id: string;
   name: string;
   set: string;
+  set_name: string;
   collector_number: string;
   image_uris?: {
     normal: string;
@@ -26,6 +27,8 @@ export interface Card {
     usd_foil: string | null;
   };
   rarity: string;
+  type_line: string;
+  oracle_text: string;
 }
 
 export interface ScryfallResponse<T> {
