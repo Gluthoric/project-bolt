@@ -25,8 +25,8 @@ export default function Sidebar({
   onReset
 }: SidebarProps) {
   return (
-    <div className="w-64 bg-gray-900 text-white h-screen fixed left-0 top-0">
-      <div className="p-4">
+    <div className="w-64 bg-gray-900 text-white h-screen fixed left-0 top-0 overflow-hidden">
+      <div className="h-full overflow-y-auto p-4">
         <NavLink to="/" className="flex items-center space-x-2 mb-8">
           <Home size={24} />
           <span>Home</span>
@@ -55,30 +55,30 @@ export default function Sidebar({
 
           <div className="border-t border-gray-700 my-4"></div>
 
-          <div className="space-y-6">
-            <section>
-              <h2 className="text-sm font-semibold text-gray-400 mb-2">Search</h2>
+          <div className="space-y-4 px-2">
+            <section className="space-y-2">
+              <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Search</h2>
               <SearchInput onSearch={onSearch} />
             </section>
 
-            <section>
-              <h2 className="text-sm font-semibold text-gray-400 mb-2">Sort</h2>
+            <section className="space-y-2">
+              <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Sort</h2>
               <SortingControls option={sortOption} onChange={onSortOptionChange} />
             </section>
 
-            <section>
-              <h2 className="text-sm font-semibold text-gray-400 mb-2">Filters</h2>
+            <section className="space-y-2">
+              <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Filters</h2>
               <FilterControls filters={filters} onChange={onFiltersChange} />
             </section>
 
-            <section>
-              <h2 className="text-sm font-semibold text-gray-400 mb-2">Subset Options</h2>
+            <section className="space-y-2">
+              <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Subset Options</h2>
               <SubsetControls />
             </section>
 
             <button
               onClick={onReset}
-              className="w-full py-2 px-4 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors"
+              className="w-full py-2 px-4 bg-gray-700 hover:bg-gray-600 text-sm text-white rounded-lg transition-colors mt-6"
             >
               Reset All Filters
             </button>

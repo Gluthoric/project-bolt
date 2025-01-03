@@ -47,7 +47,7 @@ function App() {
           onSortOptionChange={setSortOption}
           onReset={handleReset}
         />
-        <div className="flex-1">
+        <div className="flex-1 pl-64">
           <Routes>
             <Route path="/" element={<Browse />} />
             <Route path="/browse" element={<Browse />} />
