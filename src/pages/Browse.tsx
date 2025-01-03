@@ -5,7 +5,6 @@ import { Set } from '../types/scryfall';
 import SetGrid from '../components/SetGrid';
 import SetFilter from '../components/SetFilter';
 import Pagination from '../components/Pagination';
-import SidePanel from '../components/layout/SidePanel';
 
 const ITEMS_PER_PAGE = 20;
 
@@ -78,16 +77,8 @@ export default function Browse() {
   };
 
   return (
-    <div className="ml-64 bg-gray-900 min-h-screen flex">
-      <SidePanel
-        onSearch={handleSearch}
-        filters={filters}
-        onFiltersChange={setFilters}
-        sortOption={sortOption}
-        onSortOptionChange={setSortOption}
-        onReset={handleReset}
-      />
-      <div className="flex-1 p-6">
+    <div className="bg-gray-900 min-h-screen">
+      <div className="p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-white">Browse Sets</h1>
           <div className="w-64">

@@ -16,11 +16,21 @@ export default function SetDetails() {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardSize, setCardSize] = useState(200);
   const [cardsPerRow, setCardsPerRow] = useState(6);
+  const [filters, setFilters] = useState({
+    priceFilter: 'market',
+    collectionStatus: 'all',
+    setType: 'all'
+  });
+  const [sortOption, setSortOption] = useState({
+    field: 'name',
+    direction: 'asc'
+  });
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const loadCards = async () => {
       if (!setCode) return;
-      
+
       setLoading(true);
       try {
         const data = await fetchCards(setCode);
@@ -47,12 +57,29 @@ export default function SetDetails() {
   const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
   const visibleCards = cards.slice(startIndex, startIndex + CARDS_PER_PAGE);
 
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+  };
+
+  const handleReset = () => {
+    setFilters({
+      priceFilter: 'market',
+      collectionStatus: 'all',
+      setType: 'all'
+    });
+    setSortOption({
+      field: 'name',
+      direction: 'asc'
+    });
+    setSearchQuery('');
+  };
+
   return (
-    <div className="ml-64 bg-gray-900 min-h-screen">
+    <div className="bg-gray-900 min-h-screen">
       <div className="p-6">
-        <SetHeader 
-          setCode={setCode} 
-          cardCount={cards.length} 
+        <SetHeader
+          setCode={setCode}
+          cardCount={cards.length}
           showing={`${startIndex + 1}-${Math.min(startIndex + CARDS_PER_PAGE, cards.length)}`}
         />
 
@@ -62,14 +89,14 @@ export default function SetDetails() {
           onCardSizeChange={setCardSize}
           onCardsPerRowChange={setCardsPerRow}
         />
-        
-        <CardGrid 
-          cards={visibleCards} 
+
+        <CardGrid
+          cards={visibleCards}
           onCardClick={() => {}}
           cardSize={cardSize}
           cardsPerRow={cardsPerRow}
         />
-        
+
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
