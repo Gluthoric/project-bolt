@@ -7,18 +7,40 @@ The project has been updated to use local Scryfall data instead of making API ca
 
 ### Implementation Details
 
-#### Data Source
-- Using `default-cards.json` from Scryfall's bulk data
-- Located in `data/default-cards.json`
-- Contains comprehensive card data including names, sets, types, and oracle text
+#### Data Sources
+1. Cards Data
+   - Using `default-cards.json` from Scryfall's bulk data
+   - Located in `data/default-cards.json`
+   - Contains comprehensive card data including names, sets, types, and oracle text
+
+2. Sets Data
+   - Using `sets.json` from Scryfall's API
+   - Located in `data/sets.json`
+   - Contains detailed set information including:
+     - Set codes and names
+     - Release dates
+     - Set types (core, expansion, masters, etc.)
+     - Block information
+     - Card counts
+     - Digital/foil status
+     - Icon URIs
+
+To update the sets data:
+1. Run the Python update script: `./scripts/update_sets.py`
+   - Fetches latest sets from Scryfall API
+   - Preserves existing set data
+   - Adds any new sets
+   - Sorts sets by release date
+   - Updates data/sets.json automatically
 
 #### Key Components
 
 1. `src/api/localScryfall.ts`
    - Handles all local data operations
    - Implements caching for improved performance after initial load
+   - Manages both cards and sets data
    - Provides same interface as original API implementation:
-     - `fetchSets()`: Lists all unique sets
+     - `fetchSets()`: Lists all sets from sets.json
      - `fetchCards(setCode)`: Retrieves cards from a specific set
      - `searchCards(query)`: Searches cards by name, set, type, or oracle text
 
