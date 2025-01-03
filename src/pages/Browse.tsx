@@ -14,16 +14,6 @@ export default function Browse() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedSet, setSelectedSet] = useState<string | null>(null);
-  const [filters, setFilters] = useState({
-    priceFilter: 'market',
-    collectionStatus: 'all',
-    setType: 'all'
-  });
-  const [sortOption, setSortOption] = useState({
-    field: 'name',
-    direction: 'asc'
-  });
-  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const loadSets = async () => {
@@ -58,23 +48,6 @@ export default function Browse() {
   const totalPages = Math.ceil(sets.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const visibleSets = sets.slice(startIndex, startIndex + ITEMS_PER_PAGE);
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-  };
-
-  const handleReset = () => {
-    setFilters({
-      priceFilter: 'market',
-      collectionStatus: 'all',
-      setType: 'all'
-    });
-    setSortOption({
-      field: 'name',
-      direction: 'asc'
-    });
-    setSearchQuery('');
-  };
 
   return (
     <div className="bg-gray-900 min-h-screen">

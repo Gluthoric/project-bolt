@@ -38,7 +38,7 @@ function App() {
 
   return (
     <Router>
-      <div className="flex">
+      <div className="flex min-h-screen">
         <Sidebar
           onSearch={handleSearch}
           filters={filters}
@@ -47,7 +47,7 @@ function App() {
           onSortOptionChange={setSortOption}
           onReset={handleReset}
         />
-        <div className="flex-1 pl-64">
+        <main className="flex-1 ml-64">
           <Routes>
             <Route path="/" element={<Browse />} />
             <Route path="/browse" element={<Browse />} />
@@ -56,7 +56,7 @@ function App() {
             <Route path="/sets/:setCode" element={<SetDetails />} />
             <Route path="*" element={<Browse />} />
           </Routes>
-        </div>
+        </main>
       </div>
     </Router>
   );

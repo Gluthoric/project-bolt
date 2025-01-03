@@ -16,16 +16,6 @@ export default function SetDetails() {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardSize, setCardSize] = useState(200);
   const [cardsPerRow, setCardsPerRow] = useState(6);
-  const [filters, setFilters] = useState({
-    priceFilter: 'market',
-    collectionStatus: 'all',
-    setType: 'all'
-  });
-  const [sortOption, setSortOption] = useState({
-    field: 'name',
-    direction: 'asc'
-  });
-  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const loadCards = async () => {
@@ -56,23 +46,6 @@ export default function SetDetails() {
   const totalPages = Math.ceil(cards.length / CARDS_PER_PAGE);
   const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
   const visibleCards = cards.slice(startIndex, startIndex + CARDS_PER_PAGE);
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-  };
-
-  const handleReset = () => {
-    setFilters({
-      priceFilter: 'market',
-      collectionStatus: 'all',
-      setType: 'all'
-    });
-    setSortOption({
-      field: 'name',
-      direction: 'asc'
-    });
-    setSearchQuery('');
-  };
 
   return (
     <div className="bg-gray-900 min-h-screen">
