@@ -55,25 +55,36 @@ To update the sets data:
 
 ### Performance Considerations
 
-#### Current Behavior
-- Initial load time is longer due to parsing large JSON file
-- Subsequent operations are very fast due to in-memory caching
+#### Performance Optimizations
 
-#### Potential Future Improvements
-1. Progressive Loading
-   - Load data in chunks
-   - Implement lazy loading for sets/cards
-   - Consider using a more efficient storage format
+1. Data Splitting
+   - Cards are split into separate JSON files by set
+   - Each set's cards are loaded only when needed
+   - Significantly reduces initial load time
+   - Located in `data/cards/{set_code}.json`
 
-2. Data Optimization
-   - Pre-process bulk data to remove unused fields
-   - Create separate indexes for common search patterns
-   - Consider using a lightweight local database
+2. Search Optimization
+   - Pre-built search index for faster queries
+   - Index contains common search terms
+   - Results are limited to most relevant matches
+   - Located in `data/search-index.json`
 
 3. Caching Strategy
-   - Implement persistent caching
-   - Add cache invalidation for data updates
-   - Consider using IndexedDB for browser storage
+   - In-memory caching of loaded sets
+   - Per-set card caching
+   - Search results caching
+   - Fallback to default-cards.json if needed
+
+#### Updating Data
+
+1. Sets:
+   - Run `./scripts/update_sets.py`
+   - Updates sets.json with latest set information
+
+2. Cards:
+   - Place new default-cards.json in data directory
+   - Run `./scripts/split_cards.py`
+   - Creates optimized card files and search index
 
 ### Migration Notes
 - No changes required to existing components
